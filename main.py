@@ -24,16 +24,16 @@ async def analyze(request: Request, file: UploadFile = File(...)):
              (total_rows,total_columns,missing_percent,duplicate_percent,anomaly_percent,quality_score)
              VALUES (:rows, :cols, :miss, :dup, :anom, :score)
              """)
-    with engine.connect()as conn:
-        conn.execute(query,{
-            "rows": result["rows"],
-            "cols": result["columns"],
-            "miss": result["missing_percent"],
-            "dup" : result["duplicate_percent"],
-            "anom": result["anomaly_percent"],
-            "score":result["quality_score"]
-        })
-        conn.commit()
+    #with engine.connect()as conn:
+        #conn.execute(query,{
+            #"rows": result["rows"],
+            #"cols": result["columns"],
+            #"miss": result["missing_percent"],
+            #"dup" : result["duplicate_percent"],
+            #"anom": result["anomaly_percent"],
+           # "score":result["quality_score"]
+        #})
+        #conn.commit()
     return templates.TemplateResponse(
         "result.html",
         {
@@ -47,4 +47,5 @@ def history():
     query = text("SELECT * FROM quality_reports ORDER BY created_at DESC")
     with engine.connect()as conn:
         data = conn.execute(query).fetchall()
+
     return [dict(row._mapping)for row in data]
