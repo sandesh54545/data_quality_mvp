@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Data Quality Report</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f7fa;
+padding:40px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0px 4px 15px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+}
+
+.card{
+background:#3498db;
+color:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+margin-bottom:20px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+}
+
+.box{
+background:#ecf0f1;
+padding:15px;
+border-radius:8px;
+text-align:center;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+.suggestions{
+margin-top:20px;
+background:#fff3cd;
+padding:15px;
+border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Data Quality Report</h1>
+
+<div class="card">
+<h2>Quality Score: {{ result.quality_score }}</h2>
+<h3>Grade: {{ result.grade }}</h3>
+</div>
+
+<div class="stats">
+
+<div class="box">
+<h3>Rows</h3>
+<p>{{ result.rows }}</p>
+</div>
+
+<div class="box">
+<h3>Columns</h3>
+<p>{{ result.columns }}</p>
+</div>
+
+<div class="box">
+<h3>Missing %</h3>
+<p>{{ result.missing_percent }}%</p>
+</div>
+
+<div class="box">
+<h3>Duplicates %</h3>
+<p>{{ result.duplicate_percent }}%</p>
+</div>
+
+<div class="box">
+<h3>Anomaly %</h3>
+<p>{{ result.anomaly_percent }}%</p>
+</div>
+
+</div>
+
+<h2>Column Analysis</h2>
+
+<table>
+
+<tr>
+<th>Column</th>
+<th>Missing %</th>
+<th>Anomaly %</th>
+<th>Score</th>
+</tr>
+
+{% for col in result.column_analysis %}
+
+<tr>
+<td>{{ col.column }}</td>
+<td>{{ col.missing_percent }}</td>
+<td>{{ col.anomaly_percent }}</td>
+<td>{{ col.score }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<div class="suggestions">
+
+<h3>Suggestions</h3>
+
+<ul>
+
+{% for s in result.suggestions %}
+
+<li>{{ s }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

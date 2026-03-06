@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Data Quality Analyzer</title>
+<style>
+body{
+ font-family: Arial, sans-serif;
+ background: linear-gradient(135deg,#4facfe,#00f2fe);
+ height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+}
+.container{
+ background:white;
+ padding:40px;
+ border-radius:10px;
+ width:400px;
+ text-align:center;
+ box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+h1{
+ color:#2c3e50;
+}
+.upload-box{
+ margin-top:20px;
+}
+input[type="file"]{
+ margin-top:15px;
+}
+button{
+ margin-top:20px;
+ padding:12px 25px;
+ border:none;
+ background:#3498db;
+ color:white;
+ font-size:16px;
+ border-radius:5px;
+ cursor:pointer;
+}
+button:hover{
+ background:#2980b9;
+}
+.footer{
+ margin-top:20px;
+ font-size:12px;
+ color:gray;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1> Data Quality Analyzer</h1>
+<p>Upload your dataset to analyze data quality and detect anomalies.</p>
+<form action="/analyze" method="post" enctype="multipart/form-data">
+<div class="upload-box">
+<input type="file" name="file" required>
+</div>
+<button type="submit">Analyze Dataset</button>
+</form>
+<div class="footer">
+Powered by FastAPI + Machine Learning
+</div>
+</div>
+</body>
+</html>
